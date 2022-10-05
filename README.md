@@ -59,7 +59,7 @@ body:
 
 **Post multiple data**
 ```sh
-GET  /api/data-logs/add-single-data
+GET  /api/data-logs/add-data
 ```
 body: {data: []}. Data = array of object single data.
 
