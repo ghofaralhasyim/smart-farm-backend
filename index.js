@@ -1,6 +1,6 @@
 require("dotenv").config()
 require('./app/config/mongo_connect')
-bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
 const express = require('express')
 const r_dataLogs = require('./app/routes/dataLogs')
