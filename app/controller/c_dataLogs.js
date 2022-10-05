@@ -10,7 +10,7 @@ module.exports = {
         res.json(data)
     }),
 
-    insertJSON: (async (req, res, data) => {
-
+    insertJSON: ((req, res) => {
+        res.send(req.body)
     })
 }
