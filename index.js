@@ -1,16 +1,31 @@
-require("dotenv").config()
-require('./app/config/mongo_connect')
-const bodyParser = require('body-parser')
-
 const express = require('express')
-const r_dataLogs = require('./app/routes/dataLogs')
-const r_user = require('./app/routes/user')
-
 const app = express()
-app.use(bodyParser.json());
+const db = require("./app/model");
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
-app.use('/api/data_logs', r_dataLogs)
-app.use('/api/user/', r_user)
+require("dotenv").config()
+app.use(bodyParser.json())
+app.use(cors())
+
+// DB CONNECTION
+db.mongoose
+    .connect(process.env.DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => {
+        console.log("Successfully connect to MongoDB.");
+    })
+    .catch(err => {
+        console.error("Connection error", err);
+        process.exit();
+    });
+
+
+// ROUTES
+require('./app/routes/dataLogs')(app);
+require('./app/routes/user')(app);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function () {
