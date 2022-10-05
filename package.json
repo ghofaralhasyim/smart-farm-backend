@@ -2,7 +2,7 @@
   "name": "smart-farm-backend",
   "version": "1.0.0",
   "description": "endpoint system smart-farm",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
