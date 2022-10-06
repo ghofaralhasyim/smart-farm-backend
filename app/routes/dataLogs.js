@@ -10,6 +10,8 @@ module.exports = (app) => {
         next();
     })
 
-    app.get("/api/data_logs", [authJwt.verifyToken], dataLogs.getAllData)
-    app.get("/api/data_logs/:_id", [authJwt.verifyToken], dataLogs.getById)
+    app.get("/api/data-logs", [authJwt.verifyToken], dataLogs.getAllData)
+    app.get("/api/data-logs/:_id", [authJwt.verifyToken], dataLogs.getById)
+    app.post("/api/data-logs/add-single-data", [authJwt.verifyToken], dataLogs.insertSingleData)
+    app.post("/api/data-logs/add-data", [authJwt.verifyToken], dataLogs.insertJSON)
 }
