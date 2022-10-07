@@ -26,6 +26,7 @@ db.mongoose
 // ROUTES
 require('./app/routes/dataLogs')(app);
 require('./app/routes/user')(app);
+require('./app/routes/gatewayHardware')(app);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function () {
