@@ -5,7 +5,9 @@ const users = mongoose.model('users', new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    role: String
+    role: String,
+    createdAt: Date,
+    gateways: Array
 }));
 
 module.exports = users;

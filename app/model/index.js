@@ -6,5 +6,6 @@ db.mongoose = mongoose;
 
 db.user = require("./user.model");
 db.dataLogs = require("./dataLogs.model");
+db.gateways = require("./gatewayHardware.model");
 
 module.exports = db;

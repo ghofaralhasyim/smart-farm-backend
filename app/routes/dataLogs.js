@@ -12,6 +12,6 @@ module.exports = (app) => {
 
     app.get("/api/data-logs", [authJwt.verifyToken], dataLogs.getAllData)
     app.get("/api/data-logs/:_id", [authJwt.verifyToken], dataLogs.getById)
-    app.post("/api/data-logs/add-single-data", [authJwt.verifyToken], dataLogs.insertSingleData)
-    app.post("/api/data-logs/add-data", [authJwt.verifyToken], dataLogs.insertJSON)
+    app.post("/api/data-logs/add-single-data", dataLogs.insertSingleData)
+    app.post("/api/data-logs/add-data", dataLogs.insertJSON)
 }
