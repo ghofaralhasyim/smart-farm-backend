@@ -43,11 +43,11 @@ exports.insertSingleData = async (req, res, next) => {
         })
     }
     var data = new db.dataLogs({
+        idNode: req.body.idNode,
         timestamp: req.body.timestamp,
-        node: req.body.node,
-        airtemp: req.body.airtemp,
-        airhum: req.body.airhum,
-        soilhum: req.body.soilhum,
+        airTemp: req.body.airTemp,
+        airHum: req.body.airHum,
+        soilHum: req.body.soilHum,
         gps: req.body.gps
     })
     data.save((err, doc) => {
