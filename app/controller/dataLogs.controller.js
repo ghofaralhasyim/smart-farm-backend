@@ -18,7 +18,7 @@ exports.getById = async (req, res) => {
 
 exports.insertJSON = async (req, res) => {
     const gateway = await db.gateways.findOne({
-        _id: req.header['x-access-token']
+        token: req.header['x-access-token']
     })
     if (!gateway) {
         return res.status(401).send({
@@ -27,7 +27,9 @@ exports.insertJSON = async (req, res) => {
         });
     }
     db.dataLogs.insertMany(req.body.data, (err, r) => {
-        !err ? res.send("200") : res.send(err)
+        !err ? res.status(200).send({
+            message: "Success Input Data"
+        }) : res.send(err)
     })
 }
 
