@@ -18,7 +18,7 @@ exports.getById = async (req, res) => {
 
 exports.insertJSON = async (req, res) => {
     const gateway = await db.gateways.findOne({
-        token: req.header['x-access-token']
+        token: req.headers['x-access-token']
     })
     if (!gateway) {
         return res.status(401).send({
