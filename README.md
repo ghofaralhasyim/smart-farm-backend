@@ -45,10 +45,10 @@ GET  /api/data-logs/add-single-data
 body:
 { 
   "timestamp": 1664264826855,
-  "node": 3,
-  "airtemp": 0.5,
-  "airhum": 25.5,
-  "soilhum": 25.5,
+  "idNode": 3,
+  "airTemp": 0.5,
+  "airHum": 25.5,
+  "soilHum": 25.5,
   "gps": {
     "lat": 12.2823,
     "long": -34.23
@@ -63,14 +63,33 @@ body: [object, object, ...]
 object : 
 { 
   "timestamp": 1664264826855,
-  "node": 3,
-  "airtemp": 0.5,
-  "airhum": 25.5,
-  "soilhum": 25.5,
+  "idNode": 3,
+  "airTemp": 0.5,
+  "airHum": 25.5,
+  "soilHum": 25.5,
   "gps": {
     "lat": 12.2823,
     "long": -34.23
   }
 }
 
-Generate gateway token:
+**Generate gateway token:**
+```sh
+GET  /api/gateways/generate
+```
+
+body:
+{
+  "name" : "testt"
+}
+
+**User sign in**
+```sh
+POST  /api/user/signin
+```
+
+body:
+{ 
+  "email": example@example.com,
+  "password": VerySecurePassword
+}
