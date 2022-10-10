@@ -44,16 +44,14 @@ GET  /api/data-logs/add-single-data
 ```
 body:
 { 
-  data: {
-    "timestamp": 1664264826855,
-    "node": 3,
-    "airtemp": 0.5,
-    "airhum": 25.5,
-    "soilhum": 25.5,
-    "gps": {
-        "lat": 12.2823,
-        "long": -34.23
-    }
+  "timestamp": 1664264826855,
+  "node": 3,
+  "airtemp": 0.5,
+  "airhum": 25.5,
+  "soilhum": 25.5,
+  "gps": {
+    "lat": 12.2823,
+    "long": -34.23
   }
 }
 
@@ -61,6 +59,18 @@ body:
 ```sh
 GET  /api/data-logs/add-data
 ```
-body: {data: []}. Data = array of object single data.
+body: [object, object, ...]
+object : 
+{ 
+  "timestamp": 1664264826855,
+  "node": 3,
+  "airtemp": 0.5,
+  "airhum": 25.5,
+  "soilhum": 25.5,
+  "gps": {
+    "lat": 12.2823,
+    "long": -34.23
+  }
+}
 
-To be continued...
+Generate gateway token:
