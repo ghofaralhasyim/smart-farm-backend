@@ -26,7 +26,7 @@ exports.insertJSON = async (req, res) => {
             errors: "Invalid credentials"
         });
     }
-    db.dataLogs.insertMany(req.body.data, (err, r) => {
+    db.dataLogs.insertMany(req.body, (err, r) => {
         !err ? res.status(200).send({
             message: "Success Input Data"
         }) : res.send(err)
