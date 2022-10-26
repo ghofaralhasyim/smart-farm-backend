@@ -22,7 +22,7 @@ nodemon start
 ```
 *notes : if nodemon unrecognized command, you need to install nodemon globaly: **npm install -g nodemon**
 
-#### Environtment
+#### Environment
 ```sh
 DB_URI={your_mongo_uri_access}
 JWT_KEY={your_jwt_secret_key}
