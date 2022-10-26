@@ -40,7 +40,7 @@ GET  /api/data-logs/{id_log}
 ```
 **Post single data**
 ```sh
-GET  /api/data-logs/add-single-data
+POST  /api/data-logs/add-single-data
 ```
 body:
 { 
@@ -57,7 +57,7 @@ body:
 
 **Post multiple data**
 ```sh
-GET  /api/data-logs/add-data
+POST  /api/data-logs/add-data
 ```
 body: [object, object, ...]
 object : 
@@ -75,7 +75,7 @@ object :
 
 **Generate gateway token:**
 ```sh
-GET  /api/gateways/generate
+POST  /api/gateways/generate
 ```
 
 body:
