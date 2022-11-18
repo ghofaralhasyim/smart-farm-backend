@@ -7,7 +7,8 @@ const users = mongoose.model('users', new mongoose.Schema({
     password: String,
     role: String,
     createdAt: Date,
-    gateways: Array
+    gateways: Array,
+    isVerified: Boolean
 }));
 
 module.exports = users;
