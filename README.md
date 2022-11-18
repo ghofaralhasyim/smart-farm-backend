@@ -93,3 +93,10 @@ body:
   "email": example@example.com,
   "password": VerySecurePassword
 }
+
+**List all users**
+```sh
+GET /api/user/all
+```
+
+
