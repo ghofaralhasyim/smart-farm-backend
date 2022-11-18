@@ -23,3 +23,20 @@ exports.postNewUser = async (req, res) => {
         }) : res.send(err)
     })
 }
+
+exports.postNewAdmin = async (req, res) => {
+    var hash = await bcrypt.hash(req.body.password, 12);
+    var data = new db.user({
+        email: req.body.email,
+        password: hash,
+        isVerified: true,
+        createdAt: new Date().toISOString(),
+        role: "admin",
+        gateways: []
+    })
+    data.save((err, doc) => {
+        !err ? res.status(200).send({
+            message: "New admin successfully registered"
+        }) : res.send(err)
+    })
+}
