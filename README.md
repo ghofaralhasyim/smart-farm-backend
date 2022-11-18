@@ -100,3 +100,14 @@ GET /api/user/all
 ```
 
 
+**Sign up new user**
+```sh
+POST /api/user/all
+```
+body:
+{ 
+  "email": example@example.com,
+  "password": VerySecurePassword
+}
+
+
