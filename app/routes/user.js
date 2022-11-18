@@ -1,6 +1,7 @@
 const { authJwt } = require("../middleware");
 const auth = require('../controller/auth.controller')
-const user = require('../controller/user.controller')
+const user = require('../controller/user.controller');
+const users = require("../model/user.model");
 
 module.exports = (app) => {
     app.use((req, res, next) => {
@@ -12,5 +13,6 @@ module.exports = (app) => {
     })
 
     app.get("/api/user/all", [authJwt.verifyToken], user.getAllUser)
-    app.post("/api/user/signin", auth.signin);
+    app.post("/api/user/signup", user.postNewUser)
+    app.post("/api/user/signin", auth.signin)
 }
