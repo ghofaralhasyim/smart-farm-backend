@@ -22,7 +22,7 @@ nodemon start
 ```
 *notes : if nodemon unrecognized command, you need to install nodemon globaly: **npm install -g nodemon**
 
-#### Environtment
+#### Environment
 ```sh
 DB_URI={your_mongo_uri_access}
 JWT_KEY={your_jwt_secret_key}
@@ -40,27 +40,74 @@ GET  /api/data-logs/{id_log}
 ```
 **Post single data**
 ```sh
-GET  /api/data-logs/add-single-data
+POST  /api/data-logs/add-single-data
 ```
 body:
 { 
-  data: {
-    "timestamp": 1664264826855,
-    "node": 3,
-    "airtemp": 0.5,
-    "airhum": 25.5,
-    "soilhum": 25.5,
-    "gps": {
-        "lat": 12.2823,
-        "long": -34.23
-    }
+  "timestamp": 1664264826855,
+  "idNode": 3,
+  "airTemp": 0.5,
+  "airHum": 25.5,
+  "soilHum": 25.5,
+  "gps": {
+    "lat": 12.2823,
+    "long": -34.23
   }
 }
 
 **Post multiple data**
 ```sh
-GET  /api/data-logs/add-data
+POST  /api/data-logs/add-data
 ```
-body: {data: []}. Data = array of object single data.
+body: [object, object, ...]
+object : 
+{ 
+  "timestamp": 1664264826855,
+  "idNode": 3,
+  "airTemp": 0.5,
+  "airHum": 25.5,
+  "soilHum": 25.5,
+  "gps": {
+    "lat": 12.2823,
+    "long": -34.23
+  }
+}
 
-To be continued...
+**Generate gateway token:**
+```sh
+POST  /api/gateways/generate
+```
+
+body:
+{
+  "name" : "testt"
+}
+
+**User sign in**
+```sh
+POST  /api/user/signin
+```
+
+body:
+{ 
+  "email": example@example.com,
+  "password": VerySecurePassword
+}
+
+**List all users**
+```sh
+GET /api/user/all
+```
+
+
+**Sign up new user**
+```sh
+POST /api/user/all
+```
+body:
+{ 
+  "email": example@example.com,
+  "password": VerySecurePassword
+}
+
+
