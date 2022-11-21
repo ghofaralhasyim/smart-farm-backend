@@ -30,11 +30,11 @@ JWT_KEY={your_jwt_secret_key}
 #### Documentation
 API URL : https://smart-farm-backend.vercel.app
 
-**Get all data logs**
+**Get all data logs (admin)**
 ```sh
-GET  /api/data_logs
+GET  /api/data-logs
 ```
-**Get data log by id**
+**Get data log by id(admin)**
 ```sh
 GET  /api/data-logs/{id_log}
 ```
@@ -94,7 +94,7 @@ body:
   "password": VerySecurePassword
 }
 
-**List all users**
+**List all users(admin)**
 ```sh
 GET /api/user/all
 ```
@@ -103,6 +103,16 @@ GET /api/user/all
 **Sign up new user**
 ```sh
 POST /api/user/all
+```
+body:
+{ 
+  "email": example@example.com,
+  "password": VerySecurePassword
+}
+
+**Sign up new admin(admin)**
+```sh
+POST /api/user/adminSignup
 ```
 body:
 { 
