@@ -60,13 +60,4 @@ exports.postNewAdmin = async (req, res) => {
             }) : res.send(err)
         })
     }
-
-
-
-
-
-
-
-    
-
 }
