@@ -13,7 +13,7 @@ module.exports = (app) => {
     })
 
     app.get("/api/user/all", [authJwt.verifyToken], user.getAllUser)
-    app.post("/api/user/adminSignup", [authJwt.verifyToken], user.postNewAdmin)
+    app.post("/api/user/admin_signup", [authJwt.verifyToken], user.postNewAdmin)
     app.post("/api/user/signup", user.postNewUser)
     app.post("/api/user/signin", auth.signin)
 }

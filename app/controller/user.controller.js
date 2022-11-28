@@ -30,7 +30,7 @@ exports.postNewUser = async (req, res) => {
 exports.postNewAdmin = async (req, res) => {
     var hash = await bcrypt.hash(req.body.password, 12);
     let token = req.headers["x-access-token"];
- 
+
     if (!token) {
         return res.status(403).send({ message: "Unauthenticated." });
     }
@@ -42,22 +42,26 @@ exports.postNewAdmin = async (req, res) => {
         role: "admin",
         gateways: []
     })
-    
     jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
             return res.status(401).send({ message: "Unauthorized." });
         }
         req.userId = decoded.id;
     });
-
-    const user = await User.findOne({ _id : req.userId });
+    const checkUser = await db.user.find(
+        { email: req.body.email }, { _id: 1 }
+    )
+    const user = await User.findOne({ _id: req.userId });
     if (user.role != "admin") {
-        return res.status(401).send({message: "Unauthorized."})
-    } else {
-        data.save((err, doc) => {
-            !err ? res.status(200).send({
-                message: "New admin successfully registered"
-            }) : res.send(err)
-        })
+        return res.status(401).send({ message: "Unauthorized." })
     }
+    if (checkUser.length) {
+        return res.status(409).send({ message: "User already exists!" })
+    }
+    data.save((err, doc) => {
+        !err ? res.status(200).send({
+            message: "New admin successfully registered"
+        }) : res.send(err)
+    })
+    
 }
