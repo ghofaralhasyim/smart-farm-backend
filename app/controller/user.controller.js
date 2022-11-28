@@ -1,5 +1,5 @@
 const db = require("../model")
-var bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs")
 const User = db.user
 const jwt = require('jsonwebtoken')
 const config = require("../config/auth.config")
@@ -11,15 +11,20 @@ exports.getAllUser = async (req, res) => {
 }
 
 exports.postNewUser = async (req, res) => {
-    var hash = await bcrypt.hash(req.body.password, 12);
-    var data = new db.user({
+    const data = new db.user({
         email: req.body.email,
-        password: hash,
+        password: await bcrypt.hash(req.body.password, 12),
         isVerified: false,
         createdAt: new Date().toISOString(),
         role: "user",
         gateways: []
     })
+    const checkUser = await db.user.find(
+        { email: req.body.email }, { _id: 1 }
+    )
+    if (checkUser.length) {
+        return res.status(409).send({ message: "User already exists!" })
+    }
     data.save((err, doc) => {
         !err ? res.status(200).send({
             message: "New user successfully registered"
@@ -28,15 +33,14 @@ exports.postNewUser = async (req, res) => {
 }
 
 exports.postNewAdmin = async (req, res) => {
-    var hash = await bcrypt.hash(req.body.password, 12);
-    let token = req.headers["x-access-token"];
+    const token = req.headers["x-access-token"];
 
     if (!token) {
         return res.status(403).send({ message: "Unauthenticated." });
     }
-    var data = new db.user({
+    const data = new db.user({
         email: req.body.email,
-        password: hash,
+        password: await bcrypt.hash(req.body.password, 12),
         isVerified: true,
         createdAt: new Date().toISOString(),
         role: "admin",
