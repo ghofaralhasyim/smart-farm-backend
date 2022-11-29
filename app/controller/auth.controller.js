@@ -38,7 +38,8 @@ exports.signin = (req, res) => {
             name: user.name,
             role: user.role,
             email: user.email,
-            accessToken: token
+            accessToken: token,
+            isVerified: user.isVerified
         });
     })
 };
