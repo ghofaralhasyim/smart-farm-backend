@@ -12,6 +12,7 @@ exports.getAllUser = async (req, res) => {
 
 exports.postNewUser = async (req, res) => {
     const data = new db.user({
+        name: req.body.name,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 12),
         isVerified: false,
@@ -39,6 +40,7 @@ exports.postNewAdmin = async (req, res) => {
         return res.status(403).send({ message: "Unauthenticated." });
     }
     const data = new db.user({
+        name: req.body.name,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 12),
         isVerified: true,
