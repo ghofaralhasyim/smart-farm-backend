@@ -90,8 +90,8 @@ POST  /api/user/signin
 
 body:
 { 
-  "email": example@example.com,
-  "password": VerySecurePassword
+  "email": "example@example.com",
+  "password": "VerySecurePassword"
 }
 
 **List all users(admin)**
@@ -106,8 +106,8 @@ POST /api/user/all
 ```
 body:
 { 
-  "email": example@example.com,
-  "password": VerySecurePassword
+  "email": "example@example.com",
+  "password": "VerySecurePassword"
 }
 
 **Sign up new admin(admin)**
@@ -116,8 +116,17 @@ POST /api/user/adminSignup
 ```
 body:
 { 
-  "email": example@example.com,
-  "password": VerySecurePassword
+  "email": "example@example.com",
+  "password": "VerySecurePassword"
+}
+
+**Verify a user(admin)**
+```sh
+PUT /api/user/userVerify
+```
+body:
+{ 
+  "_id": "akdfainadlanf"
 }
 
 

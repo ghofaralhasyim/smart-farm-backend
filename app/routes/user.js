@@ -16,4 +16,5 @@ module.exports = (app) => {
     app.post("/api/user/admin_signup", [authJwt.verifyToken], user.postNewAdmin)
     app.post("/api/user/signup", user.postNewUser)
     app.post("/api/user/signin", auth.signin)
+    app.put("/api/user/userVerify", [authJwt.verifyToken], user.userVerify)
 }

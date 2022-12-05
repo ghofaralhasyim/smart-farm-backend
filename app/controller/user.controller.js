@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken')
 const config = require("../config/auth.config")
 
 exports.getAllUser = async (req, res) => {
-    const data = await db.user.find({})
+    const data = await User.find({})
     res.json(data)
     return
 }
 
 exports.postNewUser = async (req, res) => {
-    const data = new db.user({
+    const data = new User({
         name: req.body.name,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 12),
@@ -20,7 +20,7 @@ exports.postNewUser = async (req, res) => {
         role: "user",
         gateways: []
     })
-    const checkUser = await db.user.find(
+    const checkUser = await User.find(
         { email: req.body.email }, { _id: 1 }
     )
     if (checkUser.length) {
@@ -39,7 +39,7 @@ exports.postNewAdmin = async (req, res) => {
     if (!token) {
         return res.status(403).send({ message: "Unauthenticated." });
     }
-    const data = new db.user({
+    const data = new User({
         name: req.body.name,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 12),
@@ -54,7 +54,7 @@ exports.postNewAdmin = async (req, res) => {
         }
         req.userId = decoded.id;
     });
-    const checkUser = await db.user.find(
+    const checkUser = await User.find(
         { email: req.body.email }, { _id: 1 }
     )
     const user = await User.findOne({ _id: req.userId });
@@ -69,5 +69,39 @@ exports.postNewAdmin = async (req, res) => {
             message: "New admin successfully registered"
         }) : res.send(err)
     })
-    
+}
+
+exports.userVerify = async (req, res) => {
+    const token = req.headers["x-access-token"];
+    if (!token) {
+        return res.status(403).send({ message: "Unauthenticated." });
+    }
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return res.status(401).send({ message: "Unauthorized" });
+        }
+        req.userId = decoded.id;
+    });
+    const user = await User.findOne({ _id: req.userId });
+    if (user.role != "admin") {
+        console.log(user.role);
+        return res.status(401).send({ message: "Access Denied" })
+    }    
+    const filter = {
+        _id: req.body._id
+    };
+    const updateDocument = {
+        $set: {
+            isVerified: true,
+        },
+    };
+    try {
+        const result = await User.updateOne(filter, updateDocument);
+        res.status(200).send({message : `User ID ${req.body._id} is verified`})
+        return
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+
 }
