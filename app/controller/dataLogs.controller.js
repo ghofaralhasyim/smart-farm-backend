@@ -8,7 +8,7 @@ exports.getAllData = async (req, res) => {
 }
 
 exports.getOpenLogs = async (req, res) => {
-    const data = await db.dataLogs.find({})
+    const data = await db.dataLogs.find({}).limit(req.query.pageSize)
     res.json({
         data: data
     })
