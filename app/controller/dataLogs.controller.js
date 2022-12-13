@@ -7,6 +7,14 @@ exports.getAllData = async (req, res) => {
     return
 }
 
+exports.getOpenLogs = async (req, res) => {
+    const data = await db.dataLogs.find({})
+    res.json({
+        data: data
+    })
+    return
+}
+
 exports.getById = async (req, res) => {
     const data = await db.dataLogs.findOne({
         _id: req.params._id
